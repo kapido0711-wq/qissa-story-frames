@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Qissa is a single-page editorial site with anchored sections; keep collection selection and enquiry state on the home route to preserve the original flow.
+- Import photo and font CDN pointers from src/assets; preserve user-supplied media without embedding binaries in source control.
