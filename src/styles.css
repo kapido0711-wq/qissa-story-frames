@@ -341,3 +341,49 @@ blockquote { font-size: 28px; line-height: 1.55; font-style: italic; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Magazines + flipbook */
+.magazines-section { --maroon: #761F1B; --beige: #E4CDB8; }
+.magazine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.magazine-card h3 { font-size: 30px; margin: 6px 0 8px; }
+.magazine-card .eyebrow { margin-top: 22px; }
+.magazine-cover { aspect-ratio: 3 / 4; overflow: hidden; background: #E4CDB8; box-shadow: 0 18px 40px -22px rgb(60 20 15 / .45); }
+.magazine-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; }
+.magazine-card:hover .magazine-cover img { transform: scale(1.03); }
+.magazine-placeholder { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #761F1B; border: 1px dashed rgb(118 31 27 / .4); }
+.magazine-placeholder .wordmark { font-size: 70px; }
+.magazine-placeholder span { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+.magazine-unavailable { font-style: italic; opacity: .7; margin-top: 12px; }
+.story-section > img.curator-photo { aspect-ratio: 3 / 4; object-position: center 30%; }
+.flip-overlay { position: fixed; inset: 0; z-index: 60; background: rgb(40 12 10 / .82); backdrop-filter: blur(4px); animation: flip-fade .3s ease; }
+.flip-modal { position: fixed; inset: 0; z-index: 61; display: flex; outline: none; animation: flip-fade .35s ease; }
+.flipbook-shell { width: 100%; height: 100%; display: flex; flex-direction: column; color: #E4CDB8; padding: 20px 24px; }
+.flipbook-top, .flipbook-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.flipbook-top .eyebrow { color: #E4CDB8; opacity: .75; margin: 0; }
+.flipbook-title { font-family: var(--font-editorial); font-size: 24px; font-style: italic; }
+.flipbook-stage { flex: 1; display: flex; align-items: center; justify-content: center; gap: 18px; min-height: 0; }
+.flip-book { box-shadow: 0 30px 70px -20px rgb(0 0 0 / .6); }
+.flip-page { background: #fff; overflow: hidden; }
+.flip-page img { width: 100%; height: 100%; object-fit: contain; display: block; user-select: none; }
+.flip-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 999px; border: 1px solid rgb(228 205 184 / .4); color: #E4CDB8; background: rgb(118 31 27 / .55); transition: background .2s, opacity .2s; flex-shrink: 0; }
+.flip-icon-btn:hover:not(:disabled) { background: #761F1B; }
+.flip-icon-btn:disabled { opacity: .3; cursor: default; }
+.flip-icon-btn:focus-visible, .flip-cta:focus-visible { outline: 2px solid #E4CDB8; outline-offset: 3px; }
+.flipbook-bottom { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+.flip-cta { display: inline-flex; align-items: center; gap: 8px; background: #E4CDB8; color: #761F1B; padding: 12px 20px; font-weight: 600; transition: background .2s; }
+.flip-cta:hover { background: #fff; }
+.flip-loading { display: flex; flex-direction: column; align-items: center; gap: 14px; color: #E4CDB8; font-style: italic; margin: auto; }
+.flip-spinner { width: 34px; height: 34px; border-radius: 999px; border: 2px solid rgb(228 205 184 / .25); border-top-color: #E4CDB8; animation: flip-spin 1s linear infinite; }
+@keyframes flip-spin { to { transform: rotate(360deg); } }
+@keyframes flip-fade { from { opacity: 0; } }
+@media (max-width: 900px) { .magazine-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 767px) {
+  .magazine-grid { grid-template-columns: 1fr; gap: 50px; }
+  .flipbook-shell { padding: 14px 16px; }
+  .flipbook-stage { flex-direction: column; gap: 0; position: relative; }
+  .flipbook-stage .flip-arrow { position: absolute; bottom: -4px; z-index: 2; width: 40px; height: 40px; }
+  .flipbook-stage .flip-arrow:first-of-type { left: 0; }
+  .flipbook-stage .flip-arrow:last-of-type { right: 0; }
+  .flipbook-bottom { flex-direction: column; gap: 12px; padding-top: 14px; }
+  .flip-cta { width: 100%; justify-content: center; }
+}
