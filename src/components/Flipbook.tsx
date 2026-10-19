@@ -74,7 +74,7 @@ export default function Flipbook({ magazine, onClose }: { magazine: Magazine; on
               onFlip={(e: { data: number }) => setPage(e.data)}>
               {magazine.pages.map((src, i) => <Page key={src} src={src} n={i + 1} title={magazine.title} />)}
             </Book>
-            <button className="flip-icon-btn flip-arrow" onClick={next} disabled={page >= total - (size.single ? 1 : 2) && page !== 0 ? page >= total - 1 || !size.single && page >= total - 2 : false} aria-label="Next page"><ChevronRight /></button>
+            <button className="flip-icon-btn flip-arrow" onClick={next} disabled={page >= total - (size.single ? 1 : 2)} aria-label="Next page"><ChevronRight /></button>
           </>
         )}
       </div>
