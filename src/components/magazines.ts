@@ -1,5 +1,6 @@
 import anniversaryCover from "@/assets/anniversary-cover.jpeg.asset.json";
-import birthdayCover from "@/assets/magazine-cover.png.asset.json";
+import customCover from "@/assets/custom-cover.png.asset.json";
+import spitiCover from "@/assets/spiti-cover.png.asset.json";
 
 type Pointer = { url: string };
 const pagePointers = import.meta.glob<Pointer>("@/assets/magazines/*.asset.json", { eager: true, import: "default" });
@@ -24,6 +25,6 @@ export type Magazine = {
 
 export const magazines: Magazine[] = [
   { id: "anniversary", title: "The Anniversary Magazine", kind: "Love Qissa", description: "Twenty-two and together — a love story told in twelve pages.", cover: anniversaryCover.url, aspect: 595.5 / 842.25, pages: pagesFor("anniv") },
-  { id: "birthday", title: "The Birthday Edition", kind: "Custom Qissa", description: "A limited-edition cover story for a 19th birthday bash.", cover: birthdayCover.url, aspect: 612 / 792, pages: pagesFor("story") },
-  { id: "travel", title: "The Travel Journal", kind: "Travel Qissa", description: "A new journey is being bound. This edition is coming soon.", aspect: 1 / Math.SQRT2, pages: [] },
+  { id: "custom", title: "The Lifestyle Magazine", kind: "Custom Qissa", description: "A limited-edition cover story for a birthday bash.", cover: customCover.url, aspect: 594.96 / 842.25, pages: pagesFor("custom") },
+  { id: "spiti", title: "Spiti", kind: "Travel Qissa", description: "Higher roads, quieter places — a journey in pictures.", cover: spitiCover.url, aspect: 792 / 594, pages: pagesFor("spiti") },
 ];

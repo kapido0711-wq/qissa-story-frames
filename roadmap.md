@@ -4,3 +4,4 @@
 - [x] Replace all four collection photos with the supplied images.
 - [x] Verify images, font, collection controls, and page layout.- [x] Add magazine flipbook section with real PDF pages after The Idea.
 - [x] Replace Our Story photo with the curator portrait.
+- [x] Add WhatsApp 9321389128 and email to site
