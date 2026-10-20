@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { magazines, type Magazine } from "@/components/magazines";
 import curator from "@/assets/curator.jpeg.asset.json";
@@ -8,8 +8,6 @@ const Flipbook = lazy(() => import("@/components/Flipbook"));
 import { ArrowUpRight, ArrowDown, Menu, X, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import hero from "@/assets/original-hero.jpg.asset.json";
-import ideaTravel from "@/assets/idea-travel.jpg.asset.json";
-import ideaLove from "@/assets/idea-love.jpg.asset.json";
 import travel from "@/assets/IMG_6301.jpeg.asset.json";
 import family from "@/assets/IMG_6318.jpeg.asset.json";
 import love from "@/assets/IMG_6317.jpeg.asset.json";
@@ -44,6 +42,13 @@ function Index() {
   const [chapter, setChapter] = useState("");
   const [openMag, setOpenMag] = useState<Magazine | null>(null);
   const links = [{ id: "idea", label: "The Idea" }, { id: "magazines", label: "Magazines" }, { id: "chapters", label: "The Chapters" }, { id: "process", label: "How It Works" }, { id: "story", label: "Our Story" }];
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>("main section:not(.qissa-hero) :is(.eyebrow, h2, blockquote, .section-heading p, .idea-details > div, .magazine-card, .chapter, .process-step, .story-signature, .curator-photo, .begin-description, .enquiry-form)");
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    els.forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--reveal-delay", `${(i % 4) * 90}ms`); io.observe(el); });
+    return () => io.disconnect();
+  }, []);
   const selectChapter = (name: string) => {
     setChapter(name);
     document.getElementById("begin")?.scrollIntoView({ behavior: "smooth" });
@@ -79,7 +84,7 @@ function Index() {
             <blockquote>“We live in an age of digital abundance and physical scarcity. Our phone galleries are crowded with thousands of beautiful moments—trapped behind a screen, rarely looked at again.”</blockquote>
             <dl className="idea-details"><div><dt>Curate</dt><dd>We sift through the chaos to select your best shots.</dd></div><div><dt>Design</dt><dd>Minimalist, high-end editorial layouts.</dd></div><div><dt>Craft</dt><dd>Premium keepsakes delivered to your door.</dd></div></dl>
           </div>
-          <div className="idea-photos"><figure className="print-photo print-one"><img src={ideaTravel.url} alt="A printed memory of exploring Jaipur" loading="lazy" /></figure><figure className="print-photo print-two"><img src={ideaLove.url} alt="A printed photograph of a quiet moment together" loading="lazy" /></figure></div>
+          
         </section>
         <section className="magazines-section section-inner" id="magazines" aria-labelledby="magazines-title">
           <p className="eyebrow">A peek inside</p><div className="section-heading"><h2 id="magazines-title">The Magazines</h2><p>Turn the pages of chapters we’ve already bound.</p></div>
